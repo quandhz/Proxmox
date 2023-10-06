@@ -55,6 +55,7 @@ function update_script() {
 header_info
 if [[ ! -f /etc/apt/sources.list.d/hyperion.list ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
 msg_info "Updating ${APP} LXC"
+sudo apt-get update && sudo apt-get install wget gpg apt-transport-https lsb-release
 wget -qO- https://apt.hyperion-project.org/hyperion.pub.key | sudo gpg --dearmor -o /usr/share/keyrings/hyperion.pub.gpg
 echo "deb [signed-by=/usr/share/keyrings/hyperion.pub.gpg] https://apt.hyperion-project.org/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hyperion.list
 apt-get update &>/dev/null
